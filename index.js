@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const  studentRoutes = require("./route/studentRoutes");
+const dotenv = require("dotenv");
+const studentRoutes = require("./route/studentRoutes");
+
+dotenv.config();
 
 const app = express();
 app.use("/students", studentRoutes);
@@ -8,11 +11,10 @@ app.use("/students", studentRoutes);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect("URL", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
