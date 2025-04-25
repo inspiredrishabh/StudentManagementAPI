@@ -1,9 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const  studentRoutes = require("./route/studentRoutes");
 
 const app = express();
+app.use("/students", studentRoutes);
 
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+const PORT = 3000;
 
 mongoose
   .connect("URL", {
